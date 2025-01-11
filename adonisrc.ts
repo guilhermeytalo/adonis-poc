@@ -93,8 +93,8 @@ export default defineConfig({
     () => import('#start/routes'),
     () => import('#start/kernel'),
     // Corrected preload paths
-    // () => import('#services'),
-    // () => import('#use-cases'),
+    () => import('./app/core/services/index.js'),
+    () => import('./app/applications/use-cases/index.js'),
   ],
 
   /*

@@ -2,8 +2,8 @@
 import router from '@adonisjs/core/services/router'
 import { MiddlewareFn } from '@adonisjs/core/types/http'
 
-import UserController from '#controllers/user_controller.js'
-import AuthMiddleware from '#middleware/auth_middleware.js'
+import UserController from '#controllers/user_controller'
+import AuthMiddleware from '#middleware/auth_middleware'
 
 const userController = new UserController()
 

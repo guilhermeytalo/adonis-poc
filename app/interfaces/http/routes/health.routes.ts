@@ -1,7 +1,7 @@
 // app/interfaces/http/routes/health.routes.ts
 import router from '@adonisjs/core/services/router'
 
-import HealthController from '#controllers/health_controller.js'
+import HealthController from '#controllers/health_controller'
 
 const healthController = new HealthController()
 
