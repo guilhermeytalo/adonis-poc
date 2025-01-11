@@ -6,5 +6,10 @@ import { registerUserRoutes } from './user.routes.js' // Use relative path
 export function registerRoutes() {
   registerHealthRoutes(router)
   registerUserRoutes(router)
+
+  router.get('/', async () => {
+    return { status: 'ok' }
+  })
+
   return router
 }

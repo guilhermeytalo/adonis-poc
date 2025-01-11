@@ -3,6 +3,8 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
     "paths": {
       "#core/*": ["./app/core/*"],
       "#entities/*": ["./app/core/entities/*"],
