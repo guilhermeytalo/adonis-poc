@@ -7,7 +7,7 @@
 |
 */
 
-import { registerRoutes } from '#routes/index'
+import { registerRoutes } from "#interfaces/http/routes/index.js";
 
 // Register all routes from the interfaces layer
 registerRoutes()
