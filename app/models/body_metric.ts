@@ -1,24 +1,30 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Car extends BaseModel {
+export default class BodyMetric extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  public brand!: string
+  declare user_id: number
 
   @column()
-  public model!: string
+  declare record_date: string
 
   @column()
-  public year!: number
+  declare current_weight: number
 
   @column()
-  public color!: string
+  declare target_weight: number
 
   @column()
-  public plate!: string
+  declare chest_size: number
+
+  @column()
+  declare waist_size: number
+
+  @column()
+  declare hip_size: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
