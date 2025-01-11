@@ -2,6 +2,26 @@
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./build"
+    "outDir": "./build",
+    "paths": {
+      "#core/*": ["./app/core/*"],
+      "#entities/*": ["./app/core/entities/*"],
+      "#repositories/*": ["./app/core/repositories/*"],
+      "#services/*": ["./app/core/services/*"],
+      "#infrastructure/*": ["./app/infrastructure/*"],
+      "#models/*": ["./app/infrastructure/database/models/*"],
+      "#repos/*": ["./app/infrastructure/database/repositories/*"],
+      "#interfaces/*": ["./app/interfaces/*"],
+      "#controllers/*": ["./app/interfaces/http/controllers/*"],
+      "#middleware/*": ["./app/interfaces/http/middleware/*"],
+      "#validators/*": ["./app/interfaces/http/validators/*"],
+      "#routes/*": ["./app/interfaces/http/routes/*"],
+      "#dtos/*": ["./app/interfaces/dtos/*"],
+      "#application/*": ["./app/application/*"],
+      "#use-cases/*": ["./app/application/use-cases/*"],
+      "#errors/*": ["./app/application/errors/*"],
+      "#start/*": ["./start/*"],
+      "#config/*": ["./config/*"]
+    }
   }
 }

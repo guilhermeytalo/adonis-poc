@@ -14,6 +14,52 @@ export default defineConfig({
 
   /*
   |--------------------------------------------------------------------------
+  | Directories
+  |--------------------------------------------------------------------------
+  |
+  | Directories to load application files from. The directories array will be
+  | registered with the application container and can be used to organize
+  | your code.
+  |
+  */
+  directories: {
+    // Core layer
+    entities: 'app/core/entities',
+    domainRepositories: 'app/core/repositories', // Renamed to avoid conflict
+    services: 'app/core/services',
+
+    // Infrastructure layer
+    models: 'app/infrastructure/database/models',
+    repositories: 'app/infrastructure/database/repositories',
+    infraServices: 'app/infrastructure/services',
+
+    // Interface layer
+    controllers: 'app/interfaces/http/controllers',
+    middleware: 'app/interfaces/http/middleware',
+    validators: 'app/interfaces/http/validators',
+    routes: 'app/interfaces/http/routes',
+    dtos: 'app/interfaces/dtos',
+
+    // Application layer
+    useCases: 'app/application/use-cases',
+    errors: 'app/application/errors',
+
+    // Default Adonis directories
+    commands: 'commands',
+    config: 'config',
+    public: 'public',
+    contracts: 'contracts',
+    providers: 'providers',
+    lang: 'lang',
+    mails: 'app/mails',
+    views: 'resources/views',
+    start: 'start',
+    tests: 'tests',
+    tmp: 'tmp',
+  },
+
+  /*
+  |--------------------------------------------------------------------------
   | Service providers
   |--------------------------------------------------------------------------
   |
@@ -43,7 +89,13 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel')],
+  preloads: [
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    // Corrected preload paths
+    () => import('app/core/services'),
+    () => import('app/application/use-cases'),
+  ],
 
   /*
   |--------------------------------------------------------------------------

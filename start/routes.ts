@@ -7,10 +7,7 @@
 |
 */
 
-import router from '@adonisjs/core/services/router'
+import { registerRoutes } from '#routes/index'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+// Register all routes from the interfaces layer
+registerRoutes()
