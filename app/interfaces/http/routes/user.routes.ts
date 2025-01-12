@@ -1,4 +1,3 @@
-// app/interfaces/http/routes/user.routes.ts
 import router from '@adonisjs/core/services/router'
 import { MiddlewareFn } from '@adonisjs/core/types/http'
 
@@ -15,7 +14,7 @@ export function registerUserRoutes(routerInstance: typeof router) {
     routerInstance.put('users/:id', userController.update.bind(userController))
     routerInstance
       .delete('users/:id', userController.destroy.bind(userController))
-      .middleware([AuthMiddleware as unknown as MiddlewareFn]) // Apply middleware as needed
-    // .middleware(['auth']) // Apply middleware as needed
+      .middleware([AuthMiddleware as unknown as MiddlewareFn])
+    // .middleware(['auth']) 
   })
 }

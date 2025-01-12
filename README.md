@@ -15,7 +15,7 @@ This repository serves as a proof of concept (POC) for a modular and scalable ap
 
 ## Branches
 
-- ** Use the main branch as your source to run project
+- Use the **`main`** branch as your source to run project
 
 - **`features/02_archtecture`**: This branch provides the white-label base structure for starting new projects from scratch. If you are building a new project, start here.
 
