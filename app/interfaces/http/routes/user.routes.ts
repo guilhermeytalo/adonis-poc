@@ -15,6 +15,6 @@ export function registerUserRoutes(routerInstance: typeof router) {
     routerInstance
       .delete('users/:id', userController.destroy.bind(userController))
       .middleware([AuthMiddleware as unknown as MiddlewareFn])
-    // .middleware(['auth']) 
+    // .middleware(['auth'])
   })
 }

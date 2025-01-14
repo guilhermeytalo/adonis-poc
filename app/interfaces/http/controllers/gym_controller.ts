@@ -1,65 +1,53 @@
-import GymSession from '#models/gym_session'
 import { HttpContext } from '@adonisjs/core/http'
-import logger from '@adonisjs/core/services/logger'
+import GymSessionService from '#services/gym_session_service'
+import { gymSessionSchema } from '#validators/gym_session_validator'
 
 export default class GymSessionController {
-  public async index({}: HttpContext) {
-    const gymSessions = await GymSession.all()
-    return {
-      status: '200',
-      data: gymSessions,
-    }
+  private service: GymSessionService
+
+  constructor() {
+    this.service = new GymSessionService()
   }
 
-  public async store({ response, request }: HttpContext) {
+  public async index({}: HttpContext) {
+    const gymSessions = await this.service.getAllSessions()
+    return { status: '200', data: gymSessions }
+  }
+
+  public async store({ request, response }: HttpContext) {
     try {
-      const gymData = request.only(['user_id', 'session_date', 'duration_minutes', 'notes'])
-
-      if (!gymData.session_date) {
-        return response.badRequest({ error: 'Missing Date' })
-      }
-
-      const gymSession = await GymSession.create(gymData)
-
+      const gymData = await request.validate({ schema: gymSessionSchema })
+      const gymSession = await this.service.createSession(gymData)
       return { status: 'ok', gymSession }
     } catch (error) {
-      console.log(error)
-      logger.error(error)
-      return response.status(400).send({ error: 'Error creating gym session' })
+      return response.badRequest({ error: error.messages || 'Validation error' })
     }
   }
 
   public async show({ params, response }: HttpContext) {
     try {
-      const gymSession = await GymSession.findOrFail(params.id)
+      const gymSession = await this.service.getSessionById(params.id)
       return { status: 'ok', gymSession }
-    } catch (error) {
+    } catch {
       return response.notFound({ error: 'Gym session not found' })
     }
   }
 
   public async update({ params, request, response }: HttpContext) {
     try {
-      const gymSession = await GymSession.findOrFail(params.id)
-      const data = request.only(['session_date', 'duration_minutes', 'notes'])
-
-      gymSession.merge(data)
-      await gymSession.save()
-
+      const data = await request.validate({ schema: gymSessionSchema })
+      const gymSession = await this.service.updateSession(params.id, data)
       return { status: 'ok', gymSession }
     } catch (error) {
-      console.error(error)
       return response.internalServerError({ error: 'Unable to update gym session' })
     }
   }
 
   public async delete({ params, response }: HttpContext) {
     try {
-      const gymSession = await GymSession.findOrFail(params.id)
-      await gymSession.delete()
-
+      await this.service.deleteSession(params.id)
       return { status: 'ok', message: 'Gym session deleted successfully' }
-    } catch (error) {
+    } catch {
       return response.notFound({ error: 'Gym session not found' })
     }
   }
